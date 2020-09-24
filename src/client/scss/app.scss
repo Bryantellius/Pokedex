@@ -1,0 +1,23 @@
+$theme-colors: (
+  "dark-primary": #1d2d50,
+  "dark-secondary": #133b5c,
+  "dark-info": #1e5f74,
+  "dark-warning": #fcdab7,
+);
+
+#root {
+  overflow: hidden;
+  height: 100vh; 
+  background-color: #133b5c;
+}
+
+#homeDivPokedexShowcase {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+#homeDivNavbar {
+  background-color: #fcdab7;
+}
+
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
