@@ -8,7 +8,7 @@ const Home: React.FC<IHomeProps> = (props) => {
         {props.values.filteredPokemonArray?.map((p: IPokemon) => {
           return (
             <div className="col mb-4" key={p.id}>
-              <div className="card pokemonCard">
+              <div className="card h-100">
                 <div className="card-img-top d-flex justify-content-center">
                   <img src={p.img} alt={p.name} />
                 </div>

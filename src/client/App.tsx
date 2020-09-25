@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./views/Home";
-import Navbar from "./components/Navbar";
+import SideNav from "./components/SideNav";
 
 const App: React.FC<IAppProps> = () => {
   const [pokemonArray, setPokemonArray] = React.useState<IPokemon[]>([]);
@@ -32,7 +32,7 @@ const App: React.FC<IAppProps> = () => {
     <BrowserRouter>
       <div className="row no-gutters">
         <div id="homeDivNavbar" className="col-sm-3">
-          <Navbar
+          <SideNav
             values={{ pokemonArray, filteredPokemonArray }}
             methods={{ setFilteredPokemonArray }}
           />
