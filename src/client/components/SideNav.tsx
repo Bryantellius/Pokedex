@@ -54,7 +54,9 @@ const SideNav: React.FC<ISideNavProps> = (props) => {
     } else if (e == "") {
       let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
         (pokemon) =>
-          pokemon.name.toLocaleLowerCase().includes(e.toLocaleLowerCase())
+          pokemon.name
+            .toLocaleLowerCase()
+            .includes(filterName.toLocaleLowerCase())
       );
 
       tempPokemonArr = tempPokemonArr.filter((pokemon) =>
@@ -92,7 +94,9 @@ const SideNav: React.FC<ISideNavProps> = (props) => {
     } else if (e == "") {
       let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
         (pokemon) =>
-          pokemon.name.toLocaleLowerCase().includes(e.toLocaleLowerCase())
+          pokemon.name
+            .toLocaleLowerCase()
+            .includes(filterName.toLocaleLowerCase())
       );
 
       tempPokemonArr = tempPokemonArr.filter((pokemon) =>
