@@ -1,19 +1,46 @@
 import * as React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./views/Home";
-import Navbar from './components/Navbar';
+import Navbar from "./components/Navbar";
 
 const App: React.FC<IAppProps> = () => {
+  const [pokemonArray, setPokemonArray] = React.useState<IPokemon[]>([]);
+  const [filteredPokemonArray, setFilteredPokemonArray] = React.useState<
+    IPokemon[]
+  >([]);
+
+  const getPokedex = async () => {
+    try {
+      let result = await fetch(
+        "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
+      );
+      let { pokemon } = await result.json();
+      console.log(pokemon);
+      setPokemonArray(pokemon);
+
+      setFilteredPokemonArray(pokemon);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getPokedex();
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="row no-gutters">
         <div id="homeDivNavbar" className="col-sm-3">
-          <Navbar />
+          <Navbar
+            values={{ pokemonArray, filteredPokemonArray }}
+            methods={{ setFilteredPokemonArray }}
+          />
         </div>
         <div id="homeDivPokedexShowcase" className="col-sm-9">
           <Switch>
             <Route>
-              <Home />
+              <Home values={{ pokemonArray, filteredPokemonArray }} />
             </Route>
           </Switch>
         </div>

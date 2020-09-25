@@ -1,37 +1,37 @@
 import * as React from "react";
+import { IPokemon } from "../utils/Types";
 
-const Home: React.FC<IHomeProps> = () => {
-  const [pokedex, setPokedex] = React.useState<any>(null);
-
-  const getPokedex = async () => {
-    try {
-      let r = await fetch(
-        "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
-      );
-      let index = await r.json();
-      console.log(index);
-      setPokedex(index);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  React.useEffect(() => {
-    getPokedex();
-  }, []);
-
+const Home: React.FC<IHomeProps> = (props) => {
   return (
     <main className="container my-5">
       <div className="row row-cols-1 row-cols-md-4">
-        {pokedex?.pokemon.map((p: IPokemon) => {
+        {props.values.filteredPokemonArray?.map((p: IPokemon) => {
           return (
             <div className="col mb-4" key={p.id}>
-              <div className="card">
+              <div className="card pokemonCard">
                 <div className="card-img-top d-flex justify-content-center">
                   <img src={p.img} alt={p.name} />
                 </div>
                 <div className="card-body">
                   <h3 className="card-title text-center">{p.name}</h3>
+                  <h6>Num:</h6>
+                  <p>{p.num}</p>
+                  <h6>Types:</h6>
+                  <ul className="list-group my-2">
+                    {p.type.map((t, index) => (
+                      <li key={index} className="list-group-item">
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                  <h6>Weaknesses:</h6>
+                  <ul className="list-group my-2">
+                    {p.weaknesses.map((w, index) => (
+                      <li key={index} className="list-group-item">
+                        {w}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -42,25 +42,11 @@ const Home: React.FC<IHomeProps> = () => {
   );
 };
 
-export interface IHomeProps {}
-
-interface IPokemon {
-  avg_spawns: number;
-  candy: string;
-  candy_count: number;
-  egg: string;
-  height: string;
-  id: number;
-  img: string;
-  multipliers: Array<number>;
-  name: string;
-  next_evolution: Array<any>;
-  num: string;
-  spawn_chance: number;
-  spawn_time: string;
-  type: Array<string>;
-  weaknesses: Array<string>;
-  weight: string;
+export interface IHomeProps {
+  values: {
+    pokemonArray: Array<IPokemon>;
+    filteredPokemonArray: Array<IPokemon>;
+  };
 }
 
 export default Home;
