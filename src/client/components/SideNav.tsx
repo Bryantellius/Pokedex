@@ -10,92 +10,8 @@ const SideNav: React.FC<ISideNavProps> = (props) => {
   const filterPokemonName = (e: string) => {
     setFilterName(e);
 
-    if (e == "" && filterType == "" && filterWeakness == "") {
-      props.methods.setFilteredPokemonArray(props.values.pokemonArray);
-    } else if (e == "") {
-      let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
-        (pokemon) =>
-          pokemon.type
-            .map((t) =>
-              t.toLocaleLowerCase().includes(filterType.toLocaleLowerCase())
-                ? true
-                : false
-            )
-            .some((value) => value == true)
-      );
-
-      tempPokemonArr = tempPokemonArr.filter((pokemon) =>
-        pokemon.weaknesses
-          .map((w) =>
-            w.toLocaleLowerCase().includes(filterWeakness.toLocaleLowerCase())
-              ? true
-              : false
-          )
-          .some((value) => value == true)
-      );
-
-      props.methods.setFilteredPokemonArray(tempPokemonArr);
-    } else {
-      setTempFilterArray(props.values.filteredPokemonArray);
-      let tempPokemonArr: IPokemon[] = props.values.filteredPokemonArray.filter(
-        (pokemon) =>
-          pokemon.name.toLocaleLowerCase().includes(e.toLocaleLowerCase())
-      );
-
-      props.methods.setFilteredPokemonArray(tempPokemonArr);
-    }
-  };
-
-  const filterPokemonType = (e: string) => {
-    setFilterType(e);
-
-    if (filterName == "" && e == "" && filterWeakness == "") {
-      props.methods.setFilteredPokemonArray(props.values.pokemonArray);
-    } else if (e == "") {
-      let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
-        (pokemon) =>
-          pokemon.name.toLocaleLowerCase().includes(e.toLocaleLowerCase())
-      );
-
-      tempPokemonArr = tempPokemonArr.filter((pokemon) =>
-        pokemon.weaknesses
-          .map((w) =>
-            w.toLocaleLowerCase().includes(filterWeakness.toLocaleLowerCase())
-              ? true
-              : false
-          )
-          .some((value) => value == true)
-      );
-
-      props.methods.setFilteredPokemonArray(tempPokemonArr);
-    } else {
-      let tempPokemonArr: IPokemon[] = props.values.filteredPokemonArray.filter(
-        (pokemon) =>
-          pokemon.type
-            .map((t) =>
-              t.toLocaleLowerCase().includes(e.toLocaleLowerCase())
-                ? true
-                : false
-            )
-            .some((value) => value == true)
-      );
-
-      props.methods.setFilteredPokemonArray(tempPokemonArr);
-    }
-  };
-
-  const filterPokemonWeakness = (e: string) => {
-    setFilterWeakness(e);
-
-    if (filterName == "" && filterType == "" && e == "") {
-      props.methods.setFilteredPokemonArray(props.values.pokemonArray);
-    } else if (e == "") {
-      let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
-        (pokemon) =>
-          pokemon.name.toLocaleLowerCase().includes(e.toLocaleLowerCase())
-      );
-
-      tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+    let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
+      (pokemon) =>
         pokemon.type
           .map((t) =>
             t.toLocaleLowerCase().includes(filterType.toLocaleLowerCase())
@@ -103,23 +19,192 @@ const SideNav: React.FC<ISideNavProps> = (props) => {
               : false
           )
           .some((value) => value == true)
-      );
+    );
 
-      props.methods.setFilteredPokemonArray(tempPokemonArr);
-    } else {
-      let tempPokemonArr: IPokemon[] = props.values.filteredPokemonArray.filter(
-        (pokemon) =>
-          pokemon.weaknesses
-            .map((w) =>
-              w.toLocaleLowerCase().includes(e.toLocaleLowerCase())
-                ? true
-                : false
-            )
-            .some((value) => value == true)
-      );
+    tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+      pokemon.weaknesses
+        .map((w) =>
+          w.toLocaleLowerCase().includes(filterWeakness.toLocaleLowerCase())
+            ? true
+            : false
+        )
+        .some((value) => value == true)
+    );
 
-      props.methods.setFilteredPokemonArray(tempPokemonArr);
-    }
+    tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+      pokemon.name.toLocaleLowerCase().includes(e.toLocaleLowerCase())
+    );
+
+    props.methods.setFilteredPokemonArray(tempPokemonArr);
+
+    // if (e == "" && filterType == "" && filterWeakness == "") {
+    //   props.methods.setFilteredPokemonArray(props.values.pokemonArray);
+    // } else if (e == "") {
+    //   let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
+    //     (pokemon) =>
+    //       pokemon.type
+    //         .map((t) =>
+    //           t.toLocaleLowerCase().includes(filterType.toLocaleLowerCase())
+    //             ? true
+    //             : false
+    //         )
+    //         .some((value) => value == true)
+    //   );
+
+    //   tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+    //     pokemon.weaknesses
+    //       .map((w) =>
+    //         w.toLocaleLowerCase().includes(filterWeakness.toLocaleLowerCase())
+    //           ? true
+    //           : false
+    //       )
+    //       .some((value) => value == true)
+    //   );
+
+    //   props.methods.setFilteredPokemonArray(tempPokemonArr);
+    // } else {
+    //   setTempFilterArray(props.values.filteredPokemonArray);
+    //   let tempPokemonArr: IPokemon[] = props.values.filteredPokemonArray.filter(
+    //     (pokemon) =>
+    //       pokemon.name.toLocaleLowerCase().includes(e.toLocaleLowerCase())
+    //   );
+
+    //   props.methods.setFilteredPokemonArray(tempPokemonArr);
+    // }
+  };
+
+  const filterPokemonType = (e: string) => {
+    setFilterType(e);
+
+    let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
+      (pokemon) =>
+        pokemon.name
+          .toLocaleLowerCase()
+          .includes(filterName.toLocaleLowerCase())
+    );
+
+    tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+      pokemon.weaknesses
+        .map((w) =>
+          w.toLocaleLowerCase().includes(filterWeakness.toLocaleLowerCase())
+            ? true
+            : false
+        )
+        .some((value) => value == true)
+    );
+
+    tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+      pokemon.type
+        .map((t) =>
+          t.toLocaleLowerCase().includes(e.toLocaleLowerCase()) ? true : false
+        )
+        .some((value) => value == true)
+    );
+
+    props.methods.setFilteredPokemonArray(tempPokemonArr);
+
+    // if (filterName == "" && e == "" && filterWeakness == "") {
+    //   props.methods.setFilteredPokemonArray(props.values.pokemonArray);
+    // } else if (e == "") {
+    //   let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
+    //     (pokemon) =>
+    //       pokemon.name
+    //         .toLocaleLowerCase()
+    //         .includes(filterName.toLocaleLowerCase())
+    //   );
+
+    //   tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+    //     pokemon.weaknesses
+    //       .map((w) =>
+    //         w.toLocaleLowerCase().includes(filterWeakness.toLocaleLowerCase())
+    //           ? true
+    //           : false
+    //       )
+    //       .some((value) => value == true)
+    //   );
+
+    //   props.methods.setFilteredPokemonArray(tempPokemonArr);
+    // } else {
+    //   let tempPokemonArr: IPokemon[] = props.values.filteredPokemonArray.filter(
+    //     (pokemon) =>
+    //       pokemon.type
+    //         .map((t) =>
+    //           t.toLocaleLowerCase().includes(e.toLocaleLowerCase())
+    //             ? true
+    //             : false
+    //         )
+    //         .some((value) => value == true)
+    //   );
+
+    //   props.methods.setFilteredPokemonArray(tempPokemonArr);
+    // }
+  };
+
+  const filterPokemonWeakness = (e: string) => {
+    setFilterWeakness(e);
+
+    let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
+      (pokemon) =>
+        pokemon.name
+          .toLocaleLowerCase()
+          .includes(filterName.toLocaleLowerCase())
+    );
+
+    tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+      pokemon.type
+        .map((t) =>
+          t.toLocaleLowerCase().includes(filterType.toLocaleLowerCase())
+            ? true
+            : false
+        )
+        .some((value) => value == true)
+    );
+
+    tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+      pokemon.weaknesses
+        .map((w) =>
+          w.toLocaleLowerCase().includes(e.toLocaleLowerCase()) ? true : false
+        )
+        .some((value) => value == true)
+    );
+
+    props.methods.setFilteredPokemonArray(tempPokemonArr);
+
+    // if (filterName == "" && filterType == "" && e == "") {
+    //   props.methods.setFilteredPokemonArray(props.values.pokemonArray);
+    // } else if (e == "") {
+    //   let tempPokemonArr: IPokemon[] = props.values.pokemonArray.filter(
+    //     (pokemon) =>
+    //       pokemon.name
+    //         .toLocaleLowerCase()
+    //         .includes(filterName.toLocaleLowerCase())
+    //   );
+
+    //   tempPokemonArr = tempPokemonArr.filter((pokemon) =>
+    //     pokemon.type
+    //       .map((t) =>
+    //         t.toLocaleLowerCase().includes(filterType.toLocaleLowerCase())
+    //           ? true
+    //           : false
+    //       )
+    //       .some((value) => value == true)
+    //   );
+
+    //   props.methods.setFilteredPokemonArray(tempPokemonArr);
+    // } else {
+    //   let tempPokemonArr: IPokemon[] = props.values.filteredPokemonArray.filter(
+    //     (pokemon) =>
+    //       pokemon.weaknesses
+    //         .map((w) =>
+    //           w.toLocaleLowerCase().includes(e.toLocaleLowerCase())
+    //             ? true
+    //             : false
+    //         )
+    //         .some((value) => value == true)
+    //   );
+
+    //   props.methods.setFilteredPokemonArray(tempPokemonArr);
+    // }
   };
 
   return (
