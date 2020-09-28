@@ -7,7 +7,7 @@ $theme-colors: (
 
 #root {
   overflow: hidden;
-  height: 100vh; 
+  height: 100vh;
   background-color: #133b5c;
 }
 
@@ -18,6 +18,22 @@ $theme-colors: (
 
 #homeDivNavbar {
   background-color: #fcdab7;
+}
+
+.pokemonCard {
+  animation-name: FlyIn;
+  animation-duration: 0.75s;
+}
+
+@keyframes FlyIn {
+  from {
+    transform: translate(1000px, 0px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0px, 0px);
+    opacity: 1;
+  }
 }
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
